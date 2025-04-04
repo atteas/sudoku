@@ -150,6 +150,9 @@ document.getElementById('fileInput').addEventListener('change', function () {
                 chosenFileText.style.display = "block";
                 chosenFileText.textContent = "Chosen file: "+file.name;
 
+                //refresh page to load the changes
+                location.reload();
+
             } catch{
                 //if file not stringified json, tell user it's not valid and clear the file input
                 alert("Not valid file.");

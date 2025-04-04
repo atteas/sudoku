@@ -1,7 +1,7 @@
 //variables for progress & etc | used in file save and load
 let jsonData = {
     name: null,
-    profilePic: null,
+    profilePicId: null,
     chosenColorId: null,
     chosenGameDifficulty: null,
     gameSaved: false,
