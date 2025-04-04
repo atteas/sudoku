@@ -1,0 +1,401 @@
+:root{
+    --light: 255, 190, 80;
+    --base-color: 245, 160, 45;
+    --secondary: 20, 70, 0;
+    --secondary-light: 160, 255, 160;
+}
+
+
+body{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+
+
+/*** back button ***/
+.backButton{
+    position: fixed;
+    top: 20px;
+    left: -160px;
+    color: rgb(var(--secondary));
+    background-color: white;
+    border: 3px solid rgba(var(--base-color),0.8);
+    border-radius: 10px;
+    padding: 8px 16px;
+    width: 150px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+.backButton:hover{
+    transform: scale(1.1);
+    background-color: rgba(var(--light), 0.1);
+    top: 20px;
+    left: -5px;
+}
+
+
+
+/*** topbar ***/
+.topBar{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+}
+
+.topBarText{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 20px;
+    color: rgb(var(--secondary));
+    letter-spacing: 0.4em;
+}
+
+
+
+
+/*** options div ***/
+#optionsDiv{
+    position: absolute;
+    top: 20px;
+    right: -220px;
+    height: 500px;
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    z-index: 15;
+    transition: 1s;
+}
+
+#optionsDiv.open{
+    right: 20px;
+}
+
+#optionsToggle{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 14px;
+    color: rgb(var(--secondary));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(var(--light));
+    border-radius: 10px 0 0 10px;
+    width: 20px;
+    height: fit-content;
+    padding: 5px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: color 0.4s ease, background-color 0.4s ease;
+}
+
+#optionsToggleArrow{
+    margin-top: 5px;
+    margin-bottom: -10px;
+    transition: 1s;
+}
+
+#optionsToggleArrow.open{
+    transform: rotate(-180deg);
+}
+
+#optionsToggleText{
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+#optionsBox{
+    box-shadow: 0 0 0 7px inset rgb(var(--light));
+    background-color: white;
+    border-radius: 0 10px 10px 10px;
+    width: 220px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: box-shadow 0.4s ease;
+}
+
+#optionsInner{
+    width: 90%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+}
+
+.optionsHeader{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18px;
+    color: rgb(var(--secondary));
+    padding: 0;
+    margin: 5px;
+    transition: color 0.4s ease;
+}
+
+.optionsField{
+    height: fit-content;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.optionsText{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 12px;
+    color: rgb(var(--secondary));
+    margin: -10px 0 0 0;
+    transition: color 0.4s ease;
+}
+
+
+/** color options **/
+#colorOptions{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.colorOption{
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    box-shadow: 0 0 3px rgb(var(--secondary));
+    border-radius: 10px;
+    margin: 0 5px 5px 5px;
+    transition: 0.4s;
+    cursor: pointer;
+    transition: box-shadow 0.4s ease;
+}
+
+.colorOption.chosen{
+    transform: scale(1.1);
+    box-shadow: 0 0 3px 1px rgb(var(--secondary));
+    transition: box-shadow 0.4s ease;
+}
+
+.colorOption:hover{
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+#colorOption-1{
+    background-color: rgb(255, 190, 80);
+}
+
+#colorOption-2{
+    background-color: rgb(80, 150, 255);
+}
+
+#colorOption-3{
+    background-color: rgb(235, 140, 235);
+}
+
+#colorOption-4{
+    background-color: rgb(100, 255, 80);
+}
+
+/** file input **/ 
+#fileInput{
+    display: none;
+}
+
+#fileInputLabel, #fileSaveButton, #openProfileButton{
+    width: 80%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 14px;
+    background-color: white;
+    color: rgb(var(--secondary));
+    border: 2px solid rgba(var(--base-color),0.8);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+#fileInputLabel:hover, #fileSaveButton:hover, #openProfileButton:hover{
+    background-color: rgba(var(--light), 0.3);
+}
+
+#chosenFileText{
+    border: 2px solid rgba(var(--base-color),0.8);
+    border-radius: 5px;
+    margin: 0;
+    text-align: center;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#chosenFileText:hover{
+    transform: scale(1.03);
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+
+
+/*** sudoku ***/
+#sudokuDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 360px;
+    height: 360px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#sudoku{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 360px;
+    height: 360px;
+    border-radius: 8px;
+}
+
+.sudokuRow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 360px;
+    height: 40px;
+}
+
+.sudokuCell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    outline: 1px solid rgba(var(--secondary), 0.8);
+    transition: outline 0.4s ease;
+}
+
+.sudokuInput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.sudokuInput:hover{
+    background-color: rgba(var(--secondary-light),0.4);
+    transition: background-color 0.4s ease;
+}
+
+.sudokuInputChosen{
+    transform: scale(1.1);
+    z-index: 11;
+    box-shadow: inset 0 0 1px 2px rgba(var(--secondary), 0.8);
+    background-color: rgb(var(--secondary-light));
+    border-radius: 5px;
+}
+
+
+/*** sudoku outline ***/
+#sudokuOutline{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 360px;
+    height: 360px;
+    border: 5px solid rgb(var(--base-color));
+    border-radius: 10px;
+    transition: border 0.4s ease;
+}
+
+.outlineRow{
+    display: flex;
+    flex-direction: row;
+    width: 360px;
+    height: 120px;
+}
+
+.outlineBox{
+    width: 120px;
+    height: 120px;
+    outline: 3px solid rgb(var(--base-color));
+    transition: outline 0.4s ease;
+}
+
+
+/** number choices **/
+#numberChoices{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    margin-top: 20px;
+    box-shadow: 0 0 3px 1px rgba(var(--secondary), 0.4);
+    border-radius: 12px;
+}
+
+.numberChoice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 15px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+    box-shadow: 0 0 5px 3px rgba(var(--secondary), 0.2);
+    border-radius: 5px;
+    transition: 0.4s ease;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.numberChoice:hover{
+    background-color: rgba(var(--base-color),0.9);
+    box-shadow: 0 0 1px 3px rgba(var(--base-color),0.9);
+    transform: scale(1.2);
+}

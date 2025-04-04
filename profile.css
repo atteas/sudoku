@@ -1,0 +1,194 @@
+#profileDiv{
+    width: 40vw;
+    min-width: 300px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 60px 0 20px 0;
+    transition: 0.4s ease;
+}
+
+
+
+/** profile elements **/
+.profileSubheader{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 20px;
+    margin: 15px 0 5px 0;
+    padding: 0;
+}
+
+.profileText{
+    font-family: "Poppins", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+#saveProfileSettings{
+    width: 60%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    background-color: white;
+    color: rgb(var(--secondary));
+    border: 2px solid rgba(var(--base-color),0.8);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+#saveProfileSettings:hover{
+    background-color: rgba(var(--light), 0.3);
+    transform: scale(1.05);
+}
+
+
+
+/** profile picture **/
+#profilePictureContainer{
+    width: 300px;
+    height: 300px;
+    background-color: darkgray;
+    border: 5px solid gray;
+    border: 5px solid rgba(var(--base-color));
+    border-radius: 20px;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+#profilePictureContainer[hasChosenPicture]{
+    background-color: white;
+    border: 5px solid rgba(var(--base-color));
+}
+#profilePictureContainer:hover{
+    transform: scale(1.02);
+    border: 5px solid rgba(var(--light));
+}
+
+#profilePicture{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+
+
+/** profile picture chooser **/
+#profilePictureChooser{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -5;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#profilePictureChoices{
+    position: relative;
+    background-color: white;
+    max-width: 90vw;
+    width: fit-content;
+    min-height: 300px;
+    height: fit-content;
+    border-radius: 20px;
+    margin: 20px 0;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,200px);
+    gap: 30px;
+    box-sizing: border-box;
+}
+
+.profilePictureChoice{
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    border: 5px solid rgba(var(--base-color),0.9);
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+.profilePictureChoice:hover{
+    transform: scale(1.05);
+    border: 5px solid rgba(var(--light));
+}
+
+#closePictureChooser{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(var(--secondary));
+    cursor: pointer;
+    transition: 0.3s;
+}
+#closePictureChooser:hover{
+    transform: scale(1.5);
+}
+
+#profilePictureChoicesText{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+    color: rgb(var(--secondary));
+    letter-spacing: 0.2em;
+}
+
+/** played games **/
+#playedGamesContainer{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    border: 4px solid rgba(var(--base-color));
+    border-radius: 4px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+}
+
+.playedGamesDiv{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+}
+
+.gameModeText{
+    border: 1px solid rgba(var(--secondary),0.5);
+    margin: 0;
+    padding: 10px;
+    height: 20px;
+}
+
+.playedGamesText{
+    border: 1px solid rgba(var(--secondary),0.5);
+    margin: 0;
+    padding: 10px;
+    height: 20px;
+}

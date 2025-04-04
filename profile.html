@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Sudoku | Profile</title>
+            <link rel="stylesheet" href="profile.css">
+            <link rel="stylesheet" href="sudoku.css">
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="backButton" onclick="back()">
+            &LeftArrow; Back
+        </div>
+        <script>
+            function back(){
+                //back to the previous if page not opened in profile, otherwise defaulted to main menu
+                if (document.referrer != location.href){
+                    location.href = document.referrer;
+                } else {
+                    location.href = 'main_menu.html';
+                }
+            }
+        </script>
+
+        <div class="topBar">
+            <p class="topBarText">PROFILE</p>
+        </div>
+
+        <div id="optionsDiv">
+            <div id="optionsToggle">
+                <span id="optionsToggleArrow">&#11164;</span>
+                <p id="optionsToggleText">open</p>
+            </div>
+            <div id="optionsBox">
+                <div id="optionsInner">
+                    <h3 class="optionsHeader">Theme select:</h3>
+                    <div class="optionsField">
+                        <div id="colorOptions">
+                            <div class="colorOption chosen" id="colorOption-1"></div>
+                            <div class="colorOption" id="colorOption-2"></div>
+                            <div class="colorOption" id="colorOption-3"></div>
+                            <div class="colorOption" id="colorOption-4"></div>
+                        </div>
+                    </div>
+                    <h3 class="optionsHeader">Save:</h3>
+                    <p class="optionsText">Save your progress.</p>
+                    <div class="optionsField">
+                        <button id="fileSaveButton">Save progress</button>
+                    </div>
+                    <h3 class="optionsHeader">Load file:</h3>
+                    <p class="optionsText">Load file to continue a game.</p>
+                    <div class="optionsField">
+                        <input type="file" accept=".txt" id="fileInput">
+                        <label for="fileInput" id="fileInputLabel">Choose a file</label>
+                    </div>
+                    <p class="optionsText" id="chosenFileText" style="display: none;" title="remove"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="profileDiv">
+            <div id="profilePictureContainer" title="change profile picture">
+                <img src="https://cdn.britannica.com/57/195157-004-7D035EB5.jpg" alt="profile picture" id="profilePicture">
+            </div>
+            <div id="profilePictureChooser">
+                <div id="profilePictureChoices">
+                    <span id="closePictureChooser">
+                        &Cross;
+                    </span>
+                    <div class="topBar">
+                        <p id="profilePictureChoicesText">Choose profile picture</p>
+                    </div>
+                    <img src="images/profilePictures/RadeshDeshmuk.jpg" alt="image choice 1." class="profilePictureChoice" value="image-1">
+                    <img src="images/profilePictures/indian_guy.jpg" alt="image choice 2." class="profilePictureChoice" value="image-2">
+                    <img src="images/profilePictures/cat.jpg" alt="image choice 3." class="profilePictureChoice" value="image-3">
+                    <img src="images/profilePictures/dog.jpg" alt="image choice 4." class="profilePictureChoice" value="image-4">
+                </div>
+            </div>
+
+            <h3 class="profileSubheader">Name</h3>
+            <p class="profileText" contenteditable>click to edit</p>
+
+            <h3 class="profileSubheader">Played games</h3>
+
+            <div id="playedGamesContainer">
+                <div class="playedGamesDiv">
+                    <p class="gameModeText">Easy:</p>
+                    <p class="playedGamesText">0</p>
+                </div>
+                <div class="playedGamesDiv">
+                    <p class="gameModeText">Medium:</p>
+                    <p class="playedGamesText">0</p>
+                </div>
+                <div class="playedGamesDiv">
+                    <p class="gameModeText">Hard: </p>
+                    <p class="playedGamesText">0</p>
+                </div>
+            </div>
+
+            <button id="saveProfileSettings">Save</button>
+        </div>
+    </body>
+    <script type="module" src="saveDataManager.js"></script>
+    <script type="module" src="profile.js"></script>
+    <script type="module" src="optionsmenu.js"></script>
+</html>

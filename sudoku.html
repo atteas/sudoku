@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sudoku | difficulty</title>
+        <link rel="stylesheet" href="sudoku.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!--
+            TO DO:
+            - profiili jos näkyy: läpi-pelatut pelit (ja niide difficultyt), yms...
+            - asetukset:
+                - taustan (väri) valinta ehkä???
+                - yms...
+            - sudoku algoritmi (eri tasoset ehkä)
+            - timer
+            - kun sudoku kesken ja päättää alottaa uuden, varmistusnappi "are you sure?", sama joissai muis kohis
+            - buttonit mainemnusta sudokuun toimii, tarvii algoritmin varmaa aluks
+
+
+
+            DONE:
+            - options (tää options myös main menuu) 
+            -asetukset:
+                - outline / border color valinta 
+                - semmoset boksit mis näkyy se väri ja sit voi painaa 
+            - joku navbar mis options yms "SUDOKU - *difficulty*" keskel 
+            - animaatioita, ku valittee fieldei yms... 
+            - sellatti, et voi valita vaan yhen mumeron per ruutu 
+                - toteutus: vaiks jos ruutuun inputtaa jotai ni poistaa edellise 
+                - kato myös et numero, älä hyväksy kirjaimii yms... 
+            - wsad ja nuolinäppäimet vaihtaa valittua ruutua 
+            - save data (et voi jatkaa pelei + et voi tallentaa progress)
+                - simppeli tallennus, ei välii jos cheattaa eli muuttaa filun sisältöi ite (pilaa vaan oman pelin)
+            - buttonit mainmenuun sudokusta ja profiilista mainmenuun tai sudokuun, riippuen mikä viimeksi
+        -->
+        <div class="backButton" onclick="location.href='main_menu.html'">
+            &LeftArrow; Main Screen
+        </div>
+
+        <div class="topBar">
+            <p class="topBarText" id="topBarDifficulty">DIFFICULTY</p>
+        </div>
+
+        <div id="optionsDiv">
+            <div id="optionsToggle">
+                <span id="optionsToggleArrow">&#11164;</span>
+                <p id="optionsToggleText">open</p>
+            </div>
+            <div id="optionsBox">
+                <div id="optionsInner">
+                    <h3 class="optionsHeader">Theme select:</h3>
+                    <div class="optionsField">
+                        <div id="colorOptions">
+                            <div class="colorOption chosen" id="colorOption-1"></div>
+                            <div class="colorOption" id="colorOption-2"></div>
+                            <div class="colorOption" id="colorOption-3"></div>
+                            <div class="colorOption" id="colorOption-4"></div>
+                        </div>
+                    </div>
+
+                    <h3 class="optionsHeader">Profile</h3>
+                    <div class="optionsField">
+                        <button id="openProfileButton" onclick="location.href='profile.html'">Open profile</button>
+                    </div>
+
+                    <h3 class="optionsHeader">Save:</h3>
+                    <p class="optionsText">Save your progress.</p>
+                    <div class="optionsField">
+                        <button id="fileSaveButton">Save progress</button>
+                    </div>
+
+                    <h3 class="optionsHeader">Load file:</h3>
+                    <p class="optionsText">Load file to continue a game.</p>
+                    <div class="optionsField">
+                        <input type="file" accept=".txt" id="fileInput">
+                        <label for="fileInput" id="fileInputLabel">Choose a file</label>
+                    </div>
+                    <p class="optionsText" id="chosenFileText" style="display: none;" title="remove"></p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="sudokuDiv">
+            <div id="sudokuOutline">
+                <div class="outlineRow">
+                    <div class="outlineBox"></div>
+                    <div class="outlineBox"></div>
+                    <div class="outlineBox"></div>
+                </div>
+                <div class="outlineRow">
+                    <div class="outlineBox"></div>
+                    <div class="outlineBox"></div>
+                    <div class="outlineBox"></div>
+                </div>
+                <div class="outlineRow">
+                    <div class="outlineBox"></div>
+                    <div class="outlineBox"></div>
+                    <div class="outlineBox"></div>
+                </div>
+            </div>
+
+            <div id="sudoku">
+
+            </div>
+        </div>
+        <div id="numberChoices">
+            <div class="numberChoice" value="1">1</div>
+            <div class="numberChoice" value="2">2</div>
+            <div class="numberChoice" value="3">3</div>
+            <div class="numberChoice" value="4">4</div>
+            <div class="numberChoice" value="5">5</div>
+            <div class="numberChoice" value="6">6</div>
+            <div class="numberChoice" value="7">7</div>
+            <div class="numberChoice" value="8">8</div>
+            <div class="numberChoice" value="9">9</div>
+        </div>
+    </body>
+    <script type="module" src="saveDataManager.js"></script>
+    <script type="module" src="sudoku.js"></script>
+    <script type="module" src="optionsmenu.js"></script>
+</html>
