@@ -1,3 +1,5 @@
+import { generateSudoku } from './sudokugenerator.js';
+
 /* functions */
 function isNumber(value) {
     return /^-?\d+(\.\d+)?$/.test(value);
@@ -8,11 +10,7 @@ function isNumber(value) {
 /* create the sudoku array */
 let sudokuArray = [[],[],[],[],[],[],[],[],[]];
 
-for (var i = 0; i < 9; i++){
-    for (var j = 0; j < 9; j++){
-        sudokuArray[i][j] = j+1;
-    }
-}
+sudokuArray = generateSudoku();
 
 console.log(sudokuArray);
 
