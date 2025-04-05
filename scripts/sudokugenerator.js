@@ -47,8 +47,37 @@ function getPossibleNumbers(sudokuArray, sudokuCellRow, sudokuCellColumn){
 }
 
 
-
+/*
 var sudokuArray = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+];*/
+
+
+//test
+var sudokuArray = [
+    [1, 0, 3, 4, 6, 5, 7, 8, 0],
+    [0, 9, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+];
+
+console.log(getPossibleNumbers(sudokuArray, 0, 1));
+//test
+
+sudokuArray = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+];
+
+sudokuArray = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -61,6 +90,10 @@ var sudokuArray = [
 ];
 
 /***** FILL THE SUDOKU WITH BACKTRACKING *****/
+//test
+async function sudoku(){
+//test
+
 for (var i = 0; i < sudokuArray.length; i++){
 
     var sudokuRow = sudokuArray[i];
@@ -70,13 +103,33 @@ for (var i = 0; i < sudokuArray.length; i++){
         //console.log(i +","+ j);
         const possibleNumbers = getPossibleNumbers(sudokuArray, i, j);
 
-        if (possibleNumbers.length != 0){
+        if (possibleNumbers.length == 0){
+            //backtrack if no possible numbers
+            console.log("No possible numbers.");
+
+            //go back the row
+            j--;
+            j--;
+            //doesn't work and stays in an unlimited loop at times
+
+        } else {
+            //add number if there is possible number(s)
             const numberChoice = shuffle(possibleNumbers)[0];
-            console.log(numberChoice);
+            //console.log(numberChoice);
             sudokuArray[i][j] = numberChoice;
         }
+        console.log(sudokuArray);
         console.log(possibleNumbers);
+        console.log("I: "+i+", J: "+j);
+
+        const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+        await sleepNow(100);
     }
 }
 
 console.log(sudokuArray);
+
+//test
+}
+sudoku()
+//test
