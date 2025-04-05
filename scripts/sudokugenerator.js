@@ -1,4 +1,12 @@
 //functions
+function shuffle(array){
+    for (var i = array.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 function getPossibleNumbers(sudokuArray, sudokuCellRow, sudokuCellColumn){
     const possibleNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -34,15 +42,12 @@ function getPossibleNumbers(sudokuArray, sudokuCellRow, sudokuCellColumn){
         }
     }
 
-    console.log(possibleNumbers);
     //return possible numbers
     return possibleNumbers;
 }
 
 
 
-
-/* create the sudoku array */
 var sudokuArray = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -55,21 +60,23 @@ var sudokuArray = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
-
-/*
+/***** FILL THE SUDOKU WITH BACKTRACKING *****/
 for (var i = 0; i < sudokuArray.length; i++){
+
     var sudokuRow = sudokuArray[i];
 
     for (var j = 0; j < sudokuRow.length; j++){
-        sudokuArray[i][j] = j+1;
+        
+        //console.log(i +","+ j);
+        const possibleNumbers = getPossibleNumbers(sudokuArray, i, j);
 
-        sudokuCellRow = i;
-        sudokuCellColumn = j;
-
-        console.log()
+        if (possibleNumbers.length != 0){
+            const numberChoice = shuffle(possibleNumbers)[0];
+            console.log(numberChoice);
+            sudokuArray[i][j] = numberChoice;
+        }
+        console.log(possibleNumbers);
     }
 }
-*/
-getPossibleNumbers(sudokuArray, 0, 1);
 
 console.log(sudokuArray);
