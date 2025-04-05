@@ -1,4 +1,4 @@
-export function generateSudoku(){
+export function generateSudoku(difficulty){
 
     //functions
     function shuffle(array){
@@ -101,6 +101,32 @@ export function generateSudoku(){
 
     //start the recursive function
     fillSudoku()
+
+
+
+    /***** DELETE NUMBERS ACCORDING TO THE DIFFICULTY *****/
+
+    function deleteNumbers(sudokuArray, times){
+
+        for (var i = 0; i < times; i++){
+            const row = Math.floor(Math.random() * 9);
+            const column = Math.floor(Math.random() * 9);
+
+            sudokuArray[row][column] = 0;
+        }
+    };
+    
+    switch (difficulty){
+        case "easy":
+            deleteNumbers(sudokuArray, 40);
+            break;
+        case "medium":
+            deleteNumbers(sudokuArray, 50);
+            break;
+        case "hard":
+            deleteNumbers(sudokuArray, 60);
+            break;
+    }
 
     return sudokuArray;
 }

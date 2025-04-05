@@ -1,4 +1,5 @@
 import { generateSudoku } from './sudokugenerator.js';
+import { setSaveData, getSaveData } from './saveDataManager.js';
 
 /* functions */
 function isNumber(value) {
@@ -8,11 +9,20 @@ function isNumber(value) {
 
 
 /* create the sudoku array */
-let sudokuArray = [[],[],[],[],[],[],[],[],[]];
+var jsonData = getSaveData();
+var gameDifficulty = jsonData.chosenGameDifficulty;
 
-sudokuArray = generateSudoku();
+if (!gameDifficulty){
+    //default to easy if no value set
+    gameDifficulty = "easy";
+}
+
+let sudokuArray =  generateSudoku(gameDifficulty);
 
 console.log(sudokuArray);
+
+//edit the difficulty-text
+document.getElementById("topBarDifficulty").textContent = gameDifficulty.toUpperCase();
 
 
 
@@ -33,7 +43,9 @@ for (var i = 0; i < 9; i++){
         sudokuInput.setAttribute("row",i+1);
         sudokuInput.setAttribute("column",j+1);
 
-        //sudokuInput.textContent = sudokuArray[i][j];
+        if (sudokuArray[i][j] != 0){
+            sudokuInput.textContent = sudokuArray[i][j];
+        }
 
         sudokuCell.appendChild(sudokuInput);
         sudokuRow.appendChild(sudokuCell);

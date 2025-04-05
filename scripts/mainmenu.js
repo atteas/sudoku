@@ -14,12 +14,16 @@ document.getElementById("closeGameOptions").addEventListener("click", function()
 });
 
 /* game options */
-const gameOptions = document.querySelectorAll("div.gameOption");
-for (var i = 0; i < gameOptions.length; i++){
-    gameOptions[i].addEventListener("click", function(){
-        console.log(this.getAttribute("value"));
-        var jsonData = getSaveData();
-        jsonData.chosenGameDifficulty = this.getAttribute("value");
-        setSaveData(jsonData);
-    });
-}
+document.getElementById("gameOptions").addEventListener("click", function(event){
+    if (event.target.className){
+        if (event.target.className == "gameOption"){
+            //change difficulty in jsonData
+            var jsonData = getSaveData();
+            jsonData.chosenGameDifficulty = event.target.getAttribute("value");
+            setSaveData(jsonData);
+
+            //redirect to the sudoku
+            location.href = "sudoku.html";
+        }
+    }
+});
