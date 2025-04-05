@@ -10,19 +10,9 @@
             <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="backButton" onclick="back()">
+        <div class="backButton" id="profileBackButton">
             &LeftArrow; Back
         </div>
-        <script>
-            function back(){
-                //back to the previous if page not opened in profile, otherwise defaulted to main menu
-                if (document.referrer != location.href){
-                    location.href = document.referrer;
-                } else {
-                    location.href = 'main_menu.html';
-                }
-            }
-        </script>
 
         <div class="topBar">
             <p class="topBarText">PROFILE</p>

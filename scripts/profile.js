@@ -1,8 +1,6 @@
 import { setSaveData, getSaveData } from './saveDataManager.js';
 
-
-
-/******* PROFILE PICTURE *********/
+localStorage.setItem("changesSaved", "true");
 
 //function to change image
 function setProfilePicture(pictureId){
@@ -27,7 +25,7 @@ function setProfilePicture(pictureId){
 
 
 
-/* edit the name and profile picture if found in save data */
+/******* Edit the name and profile picture if found in the save data. *********/
 var jsonData = getSaveData();
 if (jsonData.profilePicId != null){
     setProfilePicture(jsonData.profilePicId);
@@ -38,8 +36,7 @@ if (jsonData.name != null){
 
 
 
-
-/* hide & show pictureChooser */
+/******* PROFILE PICTURE *********/
 const pictureChooser = document.getElementById("profilePictureChooser");
 //show picture chooser when clicking the image
 document.getElementById("profilePicture").addEventListener("click", function(){
@@ -52,7 +49,6 @@ document.getElementById("closePictureChooser").addEventListener("click", functio
     pictureChooser.style.zIndex = "-5";
 });
 
-
 /* choose a profile picture */
 document.getElementById("profilePictureChoices").addEventListener("click", function(event){
     if (event.target.className){
@@ -62,7 +58,7 @@ document.getElementById("profilePictureChoices").addEventListener("click", funct
             //set the profile picture
             setProfilePicture(pictureId);
 
-            //tee nii et jos muutosta ni sit muokkaa sitä hommaa
+            localStorage.setItem("changesSaved", "false");
             
             //close the menu
             document.getElementById("closePictureChooser").click();            
@@ -73,10 +69,9 @@ document.getElementById("profilePictureChoices").addEventListener("click", funct
 
 
 /******* NAME *********/
-const profileName = document.getElementById("profileName");
-
-//tee nii et jos muutosta ni sit muokkaa sitä hommaa
-
+document.getElementById("profileName").addEventListener("blur", function(){
+    localStorage.setItem("changesSaved", "false");
+})
 
 
 
@@ -92,7 +87,25 @@ document.getElementById("saveProfileSettings").addEventListener("click", functio
     jsonData.profilePicId = pictureId;
     setSaveData(jsonData);
 
+    //change the value of changesSaved
+    localStorage.setItem("changesSaved", "true");
+});
 
-    console.log(profileName);
-    console.log(pictureId);
+
+
+/******* BACK BUTTON *********/
+document.getElementById("profileBackButton").addEventListener("click", function(){
+    if (localStorage.getItem("changesSaved") == "true"){
+        //back to the previous page
+        if (document.referrer != location.href){
+            location.href = document.referrer;
+        } else {
+            location.href = 'main_menu.html';
+        }
+    } else {
+        //alert once that changes not saved, then set changesSaved to true so that the user can exit
+        alert("Save changes!");
+        localStorage.setItem("changesSaved", "true");
+    }
+    
 });
