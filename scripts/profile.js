@@ -25,7 +25,7 @@ function setProfilePicture(pictureId){
 
 
 
-/******* Edit the name and profile picture if found in the save data. *********/
+/******* Edit the name, profile picture and amount of played games if found in the save data. *********/
 var jsonData = getSaveData();
 if (jsonData.profilePicId != null){
     setProfilePicture(jsonData.profilePicId);
@@ -33,6 +33,10 @@ if (jsonData.profilePicId != null){
 if (jsonData.name != null){
     document.getElementById("profileName").textContent = jsonData.name;
 }
+
+document.getElementById("playedGamesEasy").textContent = jsonData.easyGames;
+document.getElementById("playedGamesMedium").textContent = jsonData.mediumGames;
+document.getElementById("playedGamesHard").textContent = jsonData.hardGames;
 
 
 
