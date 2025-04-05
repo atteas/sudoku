@@ -14,7 +14,7 @@
 
 <br>
 
-<h2 align="center"> S A V E  &  L O A D  D A T A </h1>
+<h2 align="center"> S A V E&nbsp;&nbsp;&&nbsp;&nbsp;L O A D&nbsp;&nbsp;D A T A </h1>
 <div align="center">
     <img src="readmeImages/saveLoadFile.png" alt="save & load file image">
 </div>
