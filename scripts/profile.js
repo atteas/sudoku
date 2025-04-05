@@ -1,8 +1,13 @@
 import { setSaveData, getSaveData } from './saveDataManager.js';
 
+
+
+/******* PROFILE PICTURE *********/
+
 //function to change image
 function setProfilePicture(pictureId){
     const profilePicture = document.getElementById("profilePicture");
+    profilePicture.setAttribute("image", pictureId);
 
     switch (pictureId){
         case "image-1":
@@ -20,16 +25,20 @@ function setProfilePicture(pictureId){
     }
 }
 
-/* add the porfile picture if in the save data */
+
+
+/* edit the name and profile picture if found in save data */
 var jsonData = getSaveData();
 if (jsonData.profilePicId != null){
-    const profilePicture = document.getElementById("profilePicture");
-
     setProfilePicture(jsonData.profilePicId);
+}
+if (jsonData.name != null){
+    document.getElementById("profileName").textContent = jsonData.name;
 }
 
 
-//tee kuvaa ja nimee varte joku valintahomma, jos kuvaa ei valittu vielä, joku basic harmaa ja sit vaihtoehtomenuhomma joo just nii
+
+
 /* hide & show pictureChooser */
 const pictureChooser = document.getElementById("profilePictureChooser");
 //show picture chooser when clicking the image
@@ -49,16 +58,41 @@ document.getElementById("profilePictureChoices").addEventListener("click", funct
     if (event.target.className){
         if (event.target.className.includes("profilePictureChoice")){
             const pictureId = event.target.getAttribute("value");
-            //change the value in jsonData
-            var jsonData = getSaveData();
-            jsonData.profilePicId = pictureId;
-            setSaveData(jsonData);
 
             //set the profile picture
             setProfilePicture(pictureId);
+
+            //tee nii et jos muutosta ni sit muokkaa sitä hommaa
             
             //close the menu
             document.getElementById("closePictureChooser").click();            
         }
     }
+});
+
+
+
+/******* NAME *********/
+const profileName = document.getElementById("profileName");
+
+//tee nii et jos muutosta ni sit muokkaa sitä hommaa
+
+
+
+
+/******* SAVE CHOICES *********/
+document.getElementById("saveProfileSettings").addEventListener("click", function(){
+    const profileName = document.getElementById("profileName").textContent;
+    const pictureId  = document.getElementById("profilePicture").getAttribute("image");
+
+
+    //change the values in jsonData
+    var jsonData = getSaveData();
+    jsonData.name = profileName;
+    jsonData.profilePicId = pictureId;
+    setSaveData(jsonData);
+
+
+    console.log(profileName);
+    console.log(pictureId);
 });
