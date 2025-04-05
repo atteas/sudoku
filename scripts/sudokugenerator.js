@@ -47,7 +47,7 @@ function getPossibleNumbers(sudokuArray, sudokuCellRow, sudokuCellColumn){
 }
 
 
-/*
+
 var sudokuArray = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -58,78 +58,43 @@ var sudokuArray = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
-];*/
-
-
-//test
-var sudokuArray = [
-    [1, 0, 3, 4, 6, 5, 7, 8, 0],
-    [0, 9, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
-console.log(getPossibleNumbers(sudokuArray, 0, 1));
-//test
-
-sudokuArray = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
-
-sudokuArray = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
 
 /***** FILL THE SUDOKU WITH BACKTRACKING *****/
-//test
-async function sudoku(){
-//test
+function fillSudoku(){
 
-for (var i = 0; i < sudokuArray.length; i++){
+    for (let i = 0; i < sudokuArray.length; i++){
 
-    var sudokuRow = sudokuArray[i];
+        var sudokuRow = sudokuArray[i];
 
-    for (var j = 0; j < sudokuRow.length; j++){
-        
-        //console.log(i +","+ j);
-        const possibleNumbers = getPossibleNumbers(sudokuArray, i, j);
+        for (let j = 0; j < sudokuRow.length; j++){
+            
+            if (sudokuArray[i][j] == 0){
+                let possibleNumbers = shuffle(getPossibleNumbers(sudokuArray, i, j));
 
-        if (possibleNumbers.length == 0){
-            //backtrack if no possible numbers
-            console.log("No possible numbers.");
+                for (let number of possibleNumbers){
+                    sudokuArray[i][j] = number;
 
-            //go back the row
-            j--;
-            j--;
-            //doesn't work and stays in an unlimited loop at times
+                    if (fillSudoku(sudokuArray)){
+                        return true;
+                    }
 
-        } else {
-            //add number if there is possible number(s)
-            const numberChoice = shuffle(possibleNumbers)[0];
-            //console.log(numberChoice);
-            sudokuArray[i][j] = numberChoice;
+                    //backtrack
+                    sudokuArray[i][j] = 0; 
+                }
+
+                //if nothing worked, go back
+                return false;
+
+            }
         }
-        console.log(sudokuArray);
-        console.log(possibleNumbers);
-        console.log("I: "+i+", J: "+j);
 
-        const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
-        await sleepNow(100);
     }
+
+    //everything filled
+    return true;
 }
 
+fillSudoku()
 console.log(sudokuArray);
-
-//test
-}
-sudoku()
-//test
