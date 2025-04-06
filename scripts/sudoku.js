@@ -173,6 +173,27 @@ function setCellValue(value){
         var jsonData = getSaveData();
         jsonData.sudoku = sudokuArray;
         setSaveData(jsonData);
+
+
+
+        /*** CHANGE WON GAMES ***/
+
+        //go through the sudokuArray
+        var stop = false;
+        for (var i = 0; i < sudokuArray.length && !stop; i++){
+            for (var j = 0; j < sudokuArray[i].length; j++){
+                if (sudokuArray[i][j] == 0){
+                    stop = true;
+                    console.log(i+","+j);
+                    break;
+                }
+            }
+        }
+
+        //if previous nested loop was not stopped, there is no zeroes left
+        if (stop == false){
+            alert("The sudoku is full!");
+        }
     }
 }; 
 
