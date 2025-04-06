@@ -6,6 +6,25 @@ function isNumber(value) {
     return /^-?\d+(\.\d+)?$/.test(value);
 }
 
+function checkIfFilled(){
+    //go through the sudokuArray
+    var stop = false;
+    for (var i = 0; i < sudokuArray.length && !stop; i++){
+        for (var j = 0; j < sudokuArray[i].length; j++){
+            if (sudokuArray[i][j] == 0){
+                stop = true;
+                break;
+            }
+        }
+    }
+
+    //if previous nested loop was not stopped, there is no zeroes left
+    if (stop == false){
+        const sudokuDoneBackground = document.getElementById("sudokuDoneBackground");
+        sudokuDoneBackground.className = "doneBackgroundShown";
+    }
+}
+
 
 
 /* create the sudoku array */
@@ -22,20 +41,23 @@ if (!gameDifficulty){
 
 /* generate sudoku */
 let sudokuArray = null;
+let completeSudoku = null;
 
 //if sudoku is saved (game was paused), get it from jsonData
 if (jsonData.gameSaved == true){
     sudokuArray = jsonData.sudoku;
+    completeSudoku = jsonData.completeSudoku;
 } else {
-    sudokuArray =  generateSudoku(gameDifficulty);
+    const sudokuArrays = generateSudoku(gameDifficulty);
+    sudokuArray =  sudokuArrays[0];
+    completeSudoku = sudokuArrays[1];
     //save the sudoku to jsonData
     jsonData = getSaveData();
     jsonData.sudoku = sudokuArray;
+    jsonData.completeSudoku = completeSudoku;
     jsonData.gameSaved = true;
     setSaveData(jsonData);
 }
-
-console.log(sudokuArray);
 
 //edit the difficulty-text
 document.getElementById("topBarDifficulty").textContent = gameDifficulty.toUpperCase();
@@ -86,7 +108,7 @@ document.addEventListener("click", function(event){
         //set chosen cell to the row & column of clicked cell
     setChosenCell(event.target.getAttribute("row"),event.target.getAttribute("column"));
     }
-})
+});
 
 function setChosenCell(row, column){
     /* row & column need to be appropriate */
@@ -100,7 +122,6 @@ function setChosenCell(row, column){
         chosenCell = document.querySelector(`div[row='${row}'][column='${column}']`);
         chosenCell.className = "sudokuInput sudokuInputChosen";
 
-        console.log(chosenCell);
     } else if (row == 0 && column == 0){
         if (chosenCell != null){
             chosenCell.className = "sudokuInput";
@@ -114,12 +135,9 @@ function setChosenCell(row, column){
 
 /* listen for typing */
 document.addEventListener("keydown", function(event){
-    console.log(event.key);
     const key = event.key;
     if (isNumber(key)){ //set cell on number 1-9
         if (1 <= key && key <= 9){
-            console.log("Aproppriate value for sudoku");
-            //passaa value functioo, joka määrää sen uudestaa siihe hommaa
             const value = parseInt(key);
             setCellValue(value);
         }
@@ -150,8 +168,6 @@ document.addEventListener("keydown", function(event){
 /* listen for numberChoice-presses */
 document.getElementById("numberChoices").addEventListener("click", function(event){
     if (event.target.getAttribute("value") != null){
-        console.log("Event target value: "+event.target.getAttribute("value"));
-        //passaa value functioo, joka määrää sen uudestaa siihe hommaa
         const value = parseInt(event.target.getAttribute("value"));
         setCellValue(value);
     }
@@ -162,46 +178,28 @@ document.getElementById("numberChoices").addEventListener("click", function(even
 /*** EDIT VALUES ***/
 function setCellValue(value){
     if (chosenCell != null){
-        if (value == "empty"){
-            chosenCell.textContent = "";
-        } else {
+        const cellRow = parseInt(chosenCell.getAttribute("row")) - 1;
+        const cellColumn = parseInt(chosenCell.getAttribute("column")) - 1;
+
+        if (completeSudoku[cellRow][cellColumn] == value){
             chosenCell.textContent = value;
+
+            //edit the sudokuArray
+            sudokuArray[cellRow][cellColumn] = value;
+
+            //save changes to jsondata
+            var jsonData = getSaveData();
+            jsonData.sudoku = sudokuArray;
+            setSaveData(jsonData);
+        } else if (value == "empty"){
+            chosenCell.textContent = "";
         }
-        
-        //edit the sudokuArray
-        sudokuArray[(parseInt(chosenCell.getAttribute("row"))-1)][(parseInt(chosenCell.getAttribute("column"))-1)] = value;
-
-        var jsonData = getSaveData();
-        jsonData.sudoku = sudokuArray;
-        setSaveData(jsonData);
-
-
 
         //check if sudoku filled
         checkIfFilled();
     }
-}; 
+} 
 
-/* show completion screen */
-function checkIfFilled(){
-    //go through the sudokuArray
-    var stop = false;
-    for (var i = 0; i < sudokuArray.length && !stop; i++){
-        for (var j = 0; j < sudokuArray[i].length; j++){
-            if (sudokuArray[i][j] == 0){
-                stop = true;
-                console.log(i+","+j);
-                break;
-            }
-        }
-    }
-
-    //if previous nested loop was not stopped, there is no zeroes left
-    if (stop == false){
-        const sudokuDoneBackground = document.getElementById("sudokuDoneBackground");
-        sudokuDoneBackground.className = "doneBackgroundShown";
-    }
-}
 
 
 /*** CHANGE WON GAMES ***/
@@ -231,7 +229,3 @@ document.getElementById("sudokuDoneButton").addEventListener("click", function()
     //redirect to main menu
     location.href = "main_menu.html";
 });
-
-
-
-/*** CHECK THAT NUMBER IS RIGHT ***/

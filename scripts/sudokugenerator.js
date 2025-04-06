@@ -100,14 +100,13 @@ export function generateSudoku(difficulty){
     }
 
     //start the recursive function
-    fillSudoku()
+    fillSudoku();
 
-
+    //save the complete sudoku with a deep copy
+    const completeSudoku = JSON.parse(JSON.stringify(sudokuArray));
 
     /***** DELETE NUMBERS ACCORDING TO THE DIFFICULTY *****/
-
     function deleteNumbers(sudokuArray, times){
-
         for (var i = 0; i < times; i++){
             const row = Math.floor(Math.random() * 9);
             const column = Math.floor(Math.random() * 9);
@@ -129,5 +128,5 @@ export function generateSudoku(difficulty){
     }
     
 
-    return sudokuArray;
+    return [sudokuArray, completeSudoku];
 }

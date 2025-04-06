@@ -58,9 +58,7 @@ function setColorOption(element){
             root.style.setProperty('--light','255, 190, 80');
             root.style.setProperty('--base-color','245, 160, 45');
             root.style.setProperty('--secondary','20, 70, 0');
-            root.style.setProperty('--secondary-light','160, 255, 160');
-            console.log("Jai DataPUM!");
-            
+            root.style.setProperty('--secondary-light','160, 255, 160');            
             break;
         case "colorOption-2":
             root.style.setProperty('--light','80, 150, 255');
@@ -104,21 +102,15 @@ document.getElementById('fileSaveButton').addEventListener('click', function () 
     //make the json a string
     const data = JSON.stringify(jsonData, null, 2);
 
-    //Change loaded file if exists, otherwise create a new file
-    if (document.getElementById('fileInput').value){
-        console.log("Tallennetaan valittuun tiedostoon.");
-        //tähän koodi, jos sen pystyy ees tekee
-    } else {
-        //make a new file and download it
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(new Blob([data], {
-            type: "text/plain"
-        }));
-        a.setAttribute("download", "sudokuData.txt");
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
+    //make a new file and download it
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([data], {
+        type: "text/plain"
+    }));
+    a.setAttribute("download", "sudokuData.txt");
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 });
 
 

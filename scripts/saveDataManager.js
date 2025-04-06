@@ -7,6 +7,7 @@ let jsonData = {
     gameSaved: false,
     gamePaused: false,
     sudoku: [],
+    completeSudoku: [],
     easyGames: 0,
     mediumGames: 0,
     hardGames: 0
