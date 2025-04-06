@@ -127,6 +127,7 @@ export function generateSudoku(difficulty){
             deleteNumbers(sudokuArray, 60);
             break;
     }
+    
 
     return sudokuArray;
 }

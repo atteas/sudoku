@@ -15,9 +15,25 @@ var gameDifficulty = jsonData.chosenGameDifficulty;
 if (!gameDifficulty){
     //default to easy if no value set
     gameDifficulty = "easy";
+    jsonData = getSaveData();
+    jsonData.chosenGameDifficulty = gameDifficulty;
+    setSaveData(jsonData);
 }
 
-let sudokuArray =  generateSudoku(gameDifficulty);
+/* generate sudoku */
+let sudokuArray = null;
+
+//if sudoku is saved (game was paused), get it from jsonData
+if (jsonData.gameSaved == true){
+    sudokuArray = jsonData.sudoku;
+} else {
+    sudokuArray =  generateSudoku(gameDifficulty);
+    //save the sudoku to jsonData
+    jsonData = getSaveData();
+    jsonData.sudoku = sudokuArray;
+    jsonData.gameSaved = true;
+    setSaveData(jsonData);
+}
 
 console.log(sudokuArray);
 
@@ -150,5 +166,12 @@ function setCellValue(value){
         } else {
             chosenCell.textContent = value;
         }
+        
+        //edit the sudokuArray
+        sudokuArray[(parseInt(chosenCell.getAttribute("row"))-1)][(parseInt(chosenCell.getAttribute("column"))-1)] = value;
+
+        var jsonData = getSaveData();
+        jsonData.sudoku = sudokuArray;
+        setSaveData(jsonData);
     }
-}
+};
