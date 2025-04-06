@@ -399,3 +399,59 @@ body{
     box-shadow: 0 0 1px 3px rgba(var(--base-color),0.9);
     transform: scale(1.2);
 }
+
+
+/** sudoku done screen **/
+#sudokuDoneBackground{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: -5;
+}
+
+#sudokuDoneBackground.doneBackgroundShown{
+    display: flex;
+    z-index: 15;
+}
+
+#sudokuDoneDiv{
+    position: relative;
+    width: 250px;
+    height: 250px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+}
+
+#sudokuDoneButton{
+    width: 80%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 14px;
+    background-color: white;
+    color: rgb(var(--secondary));
+    border: 2px solid rgba(var(--base-color),0.8);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+#sudokuDoneButton:hover{
+    transform: scale(1.1);
+    background-color: rgba(var(--light), 0.3);
+}

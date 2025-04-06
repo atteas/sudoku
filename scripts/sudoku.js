@@ -71,7 +71,8 @@ for (var i = 0; i < 9; i++){
 }
 
 
-
+//check if sudoku filled
+checkIfFilled();
 
 
 /*** MARK AND SET CHOSEN CELL FOR INPUT ***/
@@ -176,38 +177,61 @@ function setCellValue(value){
 
 
 
-        /*** CHANGE WON GAMES ***/
-
-        //go through the sudokuArray
-        var stop = false;
-        for (var i = 0; i < sudokuArray.length && !stop; i++){
-            for (var j = 0; j < sudokuArray[i].length; j++){
-                if (sudokuArray[i][j] == 0){
-                    stop = true;
-                    console.log(i+","+j);
-                    break;
-                }
-            }
-        }
-
-        //if previous nested loop was not stopped, there is no zeroes left
-        if (stop == false){
-            alert("The sudoku is full!");
-        }
+        //check if sudoku filled
+        checkIfFilled();
     }
 }; 
 
+/* show completion screen */
+function checkIfFilled(){
+    //go through the sudokuArray
+    var stop = false;
+    for (var i = 0; i < sudokuArray.length && !stop; i++){
+        for (var j = 0; j < sudokuArray[i].length; j++){
+            if (sudokuArray[i][j] == 0){
+                stop = true;
+                console.log(i+","+j);
+                break;
+            }
+        }
+    }
+
+    //if previous nested loop was not stopped, there is no zeroes left
+    if (stop == false){
+        const sudokuDoneBackground = document.getElementById("sudokuDoneBackground");
+        sudokuDoneBackground.className = "doneBackgroundShown";
+    }
+}
+
+
+/*** CHANGE WON GAMES ***/
+//change when click to main menu
+document.getElementById("sudokuDoneButton").addEventListener("click", function(){
+    //save the played game to jsonData
+    jsonData = getSaveData();
+                
+    switch(jsonData.chosenGameDifficulty){
+        case "easy":
+            jsonData.easyGames++;
+            break;
+        case "medium":
+            jsonData.mediumGames++;
+            break;
+        case "hard":
+            jsonData.hardGames++;
+            break;    
+    }
+
+    //delete the sudokuarray
+    jsonData.gameSaved = false;
+    jsonData.sudoku = [];
+
+    setSaveData(jsonData);
+
+    //redirect to main menu
+    location.href = "main_menu.html";
+});
 
 
 
 /*** CHECK THAT NUMBER IS RIGHT ***/
-
-
-
-
-
-
-
-
-/*** CHANGE WON GAMES ***/
-
