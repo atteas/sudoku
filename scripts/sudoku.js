@@ -174,4 +174,19 @@ function setCellValue(value){
         jsonData.sudoku = sudokuArray;
         setSaveData(jsonData);
     }
-};
+}; 
+
+
+
+
+/*** CHECK THAT NUMBER IS RIGHT ***/
+
+
+
+
+
+
+
+
+/*** CHANGE WON GAMES ***/
+
