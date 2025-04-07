@@ -2,7 +2,7 @@
 <div align="center">
     <img src="readmeImages/sudoku.png" alt="sudoku image">
 </div>
-<p align="center">This sudoku was made for a upper secondary high school course. In this project I wanted to also create a bit customizability and a profile for the player in addition for the sudoku. I also wanted to implement a system to traverse the cells in the sudoku easier, and ended up doing it ny using arrow keys for it. With this project I learned more about local storage and handling files to save and load data, slightly since I didn't want to take this project as far as setting up a server for profile saving data. The data is also in JSON-format, so editing it isn't hard to cheat isn't hard, but I think it doesn't matter.</p>
+<p align="center">This sudoku was made for a upper secondary high school course. In this project I wanted to also create a bit customizability and a profile for the player in addition for the sudoku. I also wanted to implement a system to traverse the cells in the sudoku easier, and ended up doing it by using arrow keys for it. With this project I learned more about local storage and handling files to save and load data, slightly since I didn't want to take this project as far as setting up a server for profile saving data etc... . The data is currently in JSON-format, so editing it isn't hard, which does leave the opportunity for a player to cheat, but since this isn't a competition I think it doesn't matter.</p>
 
 <br>
 
@@ -18,7 +18,7 @@
 <div align="center">
     <img src="readmeImages/saveLoadFile.png" alt="save & load file image">
 </div>
-<p align="center">In the same side menu there also is the options to save and load data. If no file is chosen, saving the game will create a new file and download it. If a file is loaded, it will be updated when saving.</p>
+<p align="center">In the same side menu there also is the options to save and load data. Saving the game will create a new file and download it. When a file is loaded, the page is automatically refreshed to laod the changes.</p>
 
 <br>
 
