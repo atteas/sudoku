@@ -113,14 +113,27 @@ document.addEventListener("click", function(event){
 function setChosenCell(row, column){
     /* row & column need to be appropriate */
     if (1 <= row && row <= 9 && 1 <= column && column <= 9){
-        /* clear style from last cell */
-        if (chosenCell != null){
-            chosenCell.className = "sudokuInput";
+        /* clear style from every cell */
+        const cells = document.getElementsByClassName("sudokuInput");
+        for (var i = 0; i < cells.length; i++){
+            cells[i].className = "sudokuInput";
         }
         
-        /* add style to current cell */
+        /* add highlight to current cell & cells with the same number*/
         chosenCell = document.querySelector(`div[row='${row}'][column='${column}']`);
         chosenCell.className = "sudokuInput sudokuInputChosen";
+
+        const cellNumber = parseInt(chosenCell.innerHTML);
+        if (!isNaN(cellNumber)){
+            console.log("jea");
+
+            //look for every cell with the same number
+            for (var i = 0; i < cells.length; i++){
+                if (parseInt(cells[i].innerHTML) == cellNumber){
+                    cells[i].classList.add("sudokuInputHighlighted");
+                }
+            }
+        }
 
     } else if (row == 0 && column == 0){
         if (chosenCell != null){
@@ -194,6 +207,9 @@ function setCellValue(value){
         } else if (value == "empty"){
             chosenCell.textContent = "";
         }
+
+        //set chosen cell so that highlights work
+        setChosenCell((cellRow + 1), (cellColumn + 1));
 
         //check if sudoku filled
         checkIfFilled();

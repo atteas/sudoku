@@ -332,6 +332,9 @@ body{
     border-radius: 5px;
 }
 
+.sudokuInputHighlighted{
+    background-color: rgb(var(--secondary-light));
+}
 
 /*** sudoku outline ***/
 #sudokuOutline{
