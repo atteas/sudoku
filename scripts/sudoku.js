@@ -93,6 +93,21 @@ for (var i = 0; i < 9; i++){
 }
 
 
+/* check if there is nine of some numbers */
+const cells = document.getElementsByClassName("sudokuInput");
+for (var i = 1; i <= 9; i++){
+    var numberAmount = 0;
+    for (var j = 0; j < cells.length; j++){
+        if (parseInt(cells[j].innerHTML) == i){
+            numberAmount++;
+        }
+    }
+
+    if (numberAmount == 9){
+        document.querySelector(`div.numberChoice[value='${i}']`).classList.add("numberChoiceDisabled");
+    }
+}
+
 //check if sudoku filled
 checkIfFilled();
 
@@ -125,8 +140,6 @@ function setChosenCell(row, column){
 
         const cellNumber = parseInt(chosenCell.innerHTML);
         if (!isNaN(cellNumber)){
-            console.log("jea");
-
             //look for every cell with the same number
             for (var i = 0; i < cells.length; i++){
                 if (parseInt(cells[i].innerHTML) == cellNumber){
@@ -180,7 +193,7 @@ document.addEventListener("keydown", function(event){
 
 /* listen for numberChoice-presses */
 document.getElementById("numberChoices").addEventListener("click", function(event){
-    if (event.target.getAttribute("value") != null){
+    if (event.target.getAttribute("value") != null && event.target.className == "numberChoice"){
         const value = parseInt(event.target.getAttribute("value"));
         setCellValue(value);
     }
@@ -205,11 +218,34 @@ function setCellValue(value){
             jsonData.sudoku = sudokuArray;
             setSaveData(jsonData);
         } else if (value == "empty"){
+            //save value of cell that is cleared for later use
+            value = parseInt(chosenCell.innerHTML);
+
+            //clear cell
             chosenCell.textContent = "";
         }
 
         //set chosen cell so that highlights work
         setChosenCell((cellRow + 1), (cellColumn + 1));
+
+        //disable/enable numberChoice-button if needed
+        if (!isNaN(value)){
+            var numberAmount = 0;
+
+            const cells = document.getElementsByClassName("sudokuInput");
+            for (var i = 0; i < cells.length; i++){
+                if (parseInt(cells[i].innerHTML) == value){
+                    numberAmount++;
+                }
+            }
+
+            const numberChoiceButton = document.querySelector(`div.numberChoice[value='${value}']`);
+            if (numberAmount == 9){
+                numberChoiceButton.classList.add("numberChoiceDisabled");
+            } else {
+                numberChoiceButton.classList.remove("numberChoiceDisabled");
+            } 
+        }
 
         //check if sudoku filled
         checkIfFilled();
